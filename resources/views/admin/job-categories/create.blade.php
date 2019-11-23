@@ -63,9 +63,11 @@
                 window.location.href = '{{route("job-categories.index")}}';
             },3000);
         } else if(res.type =='error') {
-            console.log();
-            toastr_msg();
-            toastr.error(res.msg);
+            $.each(res.msg, function(key, value) {
+                toastr_msg();
+                toastr.error(value);
+            });
+            
         }
     }
     </script>

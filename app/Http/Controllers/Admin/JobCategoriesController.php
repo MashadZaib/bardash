@@ -93,7 +93,7 @@ class JobCategoriesController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'type' =>'error',
-                'msg' => $validator->getMessageBag ()->toArray(),
+                'msg' => $validator->getMessageBag()->toArray(),
             ]);
         } else {
             $job_category = JobCategory::find($id);

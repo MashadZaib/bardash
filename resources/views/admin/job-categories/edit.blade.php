@@ -60,27 +60,17 @@
     <script type="text/javascript">
     function job_category_edit(res,form) {
         if(res.type =='success') {
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": true,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
-          toastr.success(res.msg);
+            toastr_msg();
+            toastr.success(res.msg);
             window.setTimeout(function(){
                 window.location.href = '{{route("job-categories.index")}}';
             },3000);
+        } else if(res.type =='error') {
+            $.each(res.msg, function(key, value) {
+                toastr_msg();
+                toastr.error(value);
+            });
+            
         }
     }
     </script>

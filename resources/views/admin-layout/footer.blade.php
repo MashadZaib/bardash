@@ -94,7 +94,7 @@
                     },
                     success: function(res, status, xhr, form) {
                         let input = $(form).find('[type=submit]');
-                        // $(form).find('[type=submit]').val(input.data('val')).prop('disabled', false);
+                        $(form).find('[type=submit]').val(input.data('val')).prop('disabled', false);
                         if (callback !== undefined && typeof callback == 'function') {
                         callback(res, form);
                         }
