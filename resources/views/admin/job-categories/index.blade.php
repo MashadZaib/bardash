@@ -49,7 +49,7 @@
 							<td>
 								<div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
 									<a href="{{route('job-categories.edit', ['job_category' => $job_category->id])}}" class="btn btn-success btn-elevate btn-pill btn-elevate-air btn-sm"><i class="fa fa-edit"></i></a>
-									<a href="#" class="btn btn-info btn-elevate btn-pill btn-elevate-air btn-sm "><i class="fa fa-trash"></i></a>
+									<button type="button" class="btn btn-info btn-elevate btn-pill btn-elevate-air btn-sm delete-btn" data-id="{{$job_category->id}}" ><i class="fa fa-trash"></i></button>
 
 								</div>
 							</td>
@@ -67,4 +67,51 @@
 
 
 @endsection
+@section('script-dashboard')
+    <script type="text/javascript">
+    	$(document).ready(function() {
+		 	$(document).on('click', '.delete-btn', function (event) {
+		        var job_cat_id = $(this).attr('data-id');
+				swal.fire({
+					title: 'Are you sure?',
+					text: "You won't be able to revert this!",
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonText: 'Yes, delete it!',
+					cancelButtonText: 'No, cancel!',
+					reverseButtons: true
+				}).then(function(result){
+					if (result.value) {
+						  $.ajax({
+		                    url:"job-categories/"+job_cat_id,
+		                    type:'DELETE',
+		                    data: {
+	                            id: job_cat_id,
+	                            '_token':$('meta[name=csrf-token]').attr('content')
+                        	},
+		                    dataType:'json',
+		                    success:function(status){
+		                        if(status.type=='success'){
+		                            swal.fire({title: "Success!", text: status.msg, type: "success"}).then((result) => {
+									// Reload the Page
+									location.reload();
+									});
+		                        } else if(status.type=='error'){
+
+		                            swal.fire("Error", status.msg, "error");
+		                        }
+		                    }
+		                });	
+					} else if (result.dismiss === 'cancel') {
+	                    swal.fire(
+	                        'Cancelled',
+	                        'No action performed :)',
+	                        'error'
+	                    )
+                	}
+				});
+		    });
+	    });
+ 	</script>
+@stop
 

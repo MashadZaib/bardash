@@ -112,6 +112,19 @@ class JobCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job_category = JobCategory::find($id)->delete($id);
+        if ($job_category) {
+            return response()->json([
+            'type' => 'success',
+            'msg' => 'Job Category deleted successfully!'
+            ]);
+        } else {
+            return response()->json([
+            'type' => 'error',
+            'msg' => 'Something went wrong please try again.'
+            ]);
+        }
+
+        
     }
 }

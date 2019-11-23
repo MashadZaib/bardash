@@ -77,6 +77,8 @@
         <!--begin::Page Scripts(used by this page) -->
         <script src="{{ URL::asset('public/assets/js/pages/dashboard.js')}}" type="text/javascript"></script>
         <script src="{{ URL::asset('public/assets/js/pages/components/extended/toastr.js')}}" type="text/javascript"></script>
+        <script src="{{ URL::asset('public/assets/js/pages/components/extended/sweetalert2.js')}}" type="text/javascript"></script>
+
         <script>
             $(document).ready(function(){
                 ajaxForm('.ajax-form');
