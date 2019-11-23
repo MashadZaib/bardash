@@ -90,7 +90,6 @@
                 let options = {
                     beforeSubmit: function(arr, form, options) {
                         let inputVal = form.find('[type=submit]').val();
-                          console.log(inputVal);
                         $(form).find('[type=submit]').val('Please Wait...').prop('disabled', true).data('val', inputVal);
                     },
                     success: function(res, status, xhr, form) {
@@ -115,6 +114,24 @@
                     }
                 };
                 $(form).ajaxForm(options);
+            }
+        </script>
+        <script>
+            function toastr_msg() {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
             }
         </script>
         

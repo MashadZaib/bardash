@@ -49,7 +49,7 @@
 							<td>
 								<div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
 									<a href="{{route('job-categories.edit', ['job_category' => $job_category->id])}}" class="btn btn-success btn-elevate btn-pill btn-elevate-air btn-sm"><i class="fa fa-edit"></i></a>
-									<a type="button" class="btn btn-info btn-elevate btn-pill btn-elevate-air btn-sm"><i class="fa fa-trash"></i></a>
+									<a href="#" class="btn btn-info btn-elevate btn-pill btn-elevate-air btn-sm "><i class="fa fa-trash"></i></a>
 
 								</div>
 							</td>

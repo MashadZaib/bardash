@@ -42,17 +42,16 @@ class JobCategoriesController extends Controller
             'type' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json( 
-                array (
-                    'errors' => $validator->getMessageBag ()->toArray()
-                ) 
-            ); 
+            return response()->json([
+                'type' =>'error',
+                'msg' => $validator->getMessageBag ()->toArray(),
+            ]); 
         } else {
             $job_category = new JobCategory();
             $job_category->name = $request->name;
             $job_category->type = $request->type;
             $job_category->save();
-            return response()->json(['type' =>'success', 'msg' => 'Job Category added successfully!']);
+            return response()->json(['type' =>'success', 'msg' => 'Job Category updated successfully!']);
         }
     }
 
@@ -86,19 +85,23 @@ class JobCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $this->validate(request(), [
+    public function update(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'type' => 'required',
         ]);
-        
-        $job_category = JobCategory::find($id);
-        $job_category->name = $request->name;
-        $job_category->type = $request->type;
-        $job_category->save();
-        Session::flash('success', 'Job Category Updated successfully!');
-        return redirect()->route('job-categories.index');
+        if ($validator->fails()) {
+            return response()->json([
+                'type' =>'error',
+                'msg' => $validator->getMessageBag ()->toArray(),
+            ]);
+        } else {
+            $job_category = JobCategory::find($id);
+            $job_category->name = $request->name;
+            $job_category->type = $request->type;
+            $job_category->save();
+            return response()->json(['type' =>'success', 'msg' => 'Job Category added successfully!']);
+        }
     }
 
     /**

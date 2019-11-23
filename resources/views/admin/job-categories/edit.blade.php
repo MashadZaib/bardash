@@ -59,11 +59,29 @@
 @section('script-dashboard')
     <script type="text/javascript">
     function job_category_edit(res,form) {
-        res = JSON.parse(res);
-        // if(res.type == 'success') {
-        //     window.location = res.redirect_page;
-        //     $('#paypal-button-container').css("pointer-events", "none");
-        // }
+        if(res.type =='success') {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+          toastr.success(res.msg);
+            window.setTimeout(function(){
+                window.location.href = '{{route("job-categories.index")}}';
+            },3000);
+        }
     }
     </script>
 @stop
